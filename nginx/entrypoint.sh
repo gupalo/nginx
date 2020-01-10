@@ -34,7 +34,7 @@ cat ${DIR}/nginx.conf \
 
 [[ "${APP_ENV}" = "dev" ]] && sed -i 's/sendfile on/sendfile off/' /etc/nginx/nginx.conf
 
-if [[ "${SSL}" = "1" ]]; then
+if [[ "${SSL}" = "1" ]] && [[ -e "/etc/nginx/ssl/fullchain.pem" ]]; then
     sed -i 's/###SSL //' /etc/nginx/nginx.conf
     sed -i 's/listen 80; #default/#listen 80; #default/' /etc/nginx/nginx.conf
 fi
