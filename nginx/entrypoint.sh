@@ -6,6 +6,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 [ -z "${APP_DOMAIN}" ] && APP_DOMAIN="_"
 [ -z "${PHP_APP_FILE}" ] && PHP_APP_FILE="index.php"
 [ -z "${PHP_APP_FILE_REGEX}" ] && PHP_APP_FILE_REGEX=${PHP_APP_FILE/\./\\\.}
+[ -z "${FORBIDDEN_EXTENSION}" ] && FORBIDDEN_EXTENSION="php"
 [ -z "${PHP_HOST}" ] && PHP_HOST="fpm"
 [ -z "${PHP_PORT}" ] && PHP_PORT="9000"
 [ -z "${REMOTE_ADDR_PARAM}" ] && REMOTE_ADDR_PARAM="http_x_real_ip" # if you don't have X-Real-IP, you can use "remote_addr"
@@ -24,6 +25,7 @@ cat ${DIR}/nginx.conf \
     | sed "s%{APP_DOMAIN}%${APP_DOMAIN}%g" \
     | sed "s%{PHP_APP_FILE}%${PHP_APP_FILE}%g" \
     | sed "s%{PHP_APP_FILE_REGEX}%${PHP_APP_FILE_REGEX}%g" \
+    | sed "s%{FORBIDDEN_EXTENSION}%${FORBIDDEN_EXTENSION}%g" \
     | sed "s%{PHP_HOST}%${PHP_HOST}%g" \
     | sed "s%{PHP_PORT}%${PHP_PORT}%g" \
     | sed "s%{REMOTE_ADDR_PARAM}%${REMOTE_ADDR_PARAM}%g" \
